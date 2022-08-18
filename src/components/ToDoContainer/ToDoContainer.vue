@@ -1,15 +1,15 @@
 <template>
 <div>
-          <div class="app-addTask container">
-          <div class="app-addTask-container">
+          <div class="addTask container">
+          <div class="addTask-container">
             <b-form-input id="input-large" type="text" @keyup.enter="addTask" v-model="currentTask" placeholder="Enter a new task..."></b-form-input>
             <b-button type="button" class="btn btn-dark" @click="addTask" >Add new task!</b-button>
           </div>
         </div>
-        <div class="app-tasksList">
+        <div class="tasksList">
           <b-list-group :key="tasks[task]" v-for="task in tasks">
             <b-list-group-item class="d-flex justify-content-between align-items-center">
-              <div v-if="task.isEditing === true">
+              <div class="taskList-changeTask" v-if="task.isEditing === true">
                 <b-form-input id="input-large" v-model="editValue" @keyup.enter="changeTask(task.text)"></b-form-input>
                 <b-button variant="success" type="button" @click="changeTask(task.text)"><b-icon icon="check"></b-icon></b-button>
               </div>
@@ -35,6 +35,16 @@ export default {
         tasks: [
       {
         text: 'Learn Vue.js',
+        isComplited: false,
+        isEditing: false
+      },
+      {
+        text: 'Learn React.js',
+        isComplited: true,
+        isEditing: false
+      },
+      {
+        text: 'Learn Angular.js',
         isComplited: false,
         isEditing: false
       }
@@ -87,27 +97,33 @@ export default {
 </script>
 
 <style scoped>
-  .app-addTask {
+  .addTask {
     display: grid;
     align-self: center;
     width: 100vw;
     margin: 50px 0;
 }
-.app-addTask-container {
+.addTask-container {
     display: grid;
     width: 50%;
     justify-self: center;
 }
-.app-addTask input {
+.addTask input {
     margin-bottom: 10px;
 }
-.app-addTask button {
+.addTask button {
     cursor: pointer;
     inline-size: fit-content;
     justify-self: center;
 }
-.app-tasksList {
+.tasksList {
     color: #50514F;
     font-size: 1.5em;
+}
+.taskList-changeTask {
+  display: flex;
+}
+.taskList-changeTask button{
+  margin-left: 10px
 }
 </style>
